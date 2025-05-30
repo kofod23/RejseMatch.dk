@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RejseMatch.dk</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: #e2e8f0;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+    .tabs button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      color: #1f2937;
+      transition: background 0.3s;
+    }
+    .tabs button:hover {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+    .search-section {
+      max-width: 600px;
+      margin: 1rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      display: none;
+    }
+    .search-section.active {
+      display: block;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .ad-footer {
+      background: #fef3c7;
+      color: #78350f;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RejseMatch.dk</h1>
+    <p>Vælg Hotel, Fly eller Billeje for at finde din perfekte rejse</p>
+  </header>
+
+  <div class="tabs">
+    <button onclick="selectTab('hotel')">🏨 Hotel</button>
+    <button onclick="selectTab('flight')">✈️ Fly</button>
+    <button onclick="selectTab('car')">🚗 Billeje</button>
+  </div>
+
+  <div id="hotel" class="search-section">
+    <h2>Find Hotel</h2>
+    <label>Destination</label>
+    <input type="text" placeholder="Fx. Paris">
+    <label>Check-in dato</label>
+    <input type="date" onchange="focusNext(this, 'hotel-checkout')">
+    <label>Check-ud dato</label>
+    <input type="date" id="hotel-checkout">
+  </div>
+
+  <div id="flight" class="search-section">
+    <h2>Find Flyrejse</h2>
+    <label>Fra</label>
+    <input type="text" placeholder="Fx. København">
+    <label>Til</label>
+    <input type="text" placeholder="Fx. Rom">
+    <label>Afrejsedato</label>
+    <input type="date" onchange="focusNext(this, 'flight-return')">
+    <label>Returdato</label>
+    <input type="date" id="flight-return">
+  </div>
+
+  <div id="car" class="search-section">
+    <h2>Find Billeje</h2>
+    <label>By</label>
+    <input type="text" placeholder="Fx. Barcelona">
+    <label>Afhentning</label>
+    <input type="date" onchange="focusNext(this, 'car-dropoff')">
+    <label>Aflevering</label>
+    <input type="date" id="car-dropoff">
+  </div>
+
+  <div class="ad-footer">
+    🔥 Tjek vores eksklusive rejsetilbud og rabatter her – fx Booking.com, Skyscanner, Rentalcars
+  </div>
+
+  <script>
+    function selectTab(tabId) {
+      const tabs = document.querySelectorAll('.search-section');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function focusNext(current, nextId) {
+      document.getElementById(nextId)?.focus();
+    }
+  </script>
+</body>
+</html>
